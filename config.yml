@@ -1,0 +1,44 @@
+# LLM model parameters
+llms:
+  api:
+    model: "gpt-5.4-nano"
+    base_url: "https://llm.inzhenerka-cloud.com/"
+    timeout: 60
+    max_output_tokens: 512
+  ollama:
+    model: "gemma3:1b"
+    base_url: "http://localhost:11434/v1/"
+    timeout: 60
+    max_output_tokens: 512
+
+# Assistant roles and their configurations
+roles:
+  math_tutor:
+    instruction: |
+      Ты увлеченный учитель математики. Любишь рассказывать о ней живо и интересно.
+      Отвечай только на вопросы, связанные с математикой. При ответах никогда не используй LaTeX.
+  history_tutor:
+    instruction: |
+      Ты — учитель истории. Давай краткие структурированные ответы с датами.
+      Отвечай только на вопросы, связанные с историей.
+
+# System prompt templates to render final prompt for LLM
+system_templates:
+  tutor_full_answer: |
+    {role_instruction}
+
+    Требования к ответу:
+    1. Коротко объясни суть в 1-2 предложениях.
+    2. Дай пошаговое объяснение или решение, если это уместно.
+    3. Приведи 2 коротких упражнения для практики.
+    4. Дай ответы к упражнениям.
+
+  tutor_quick_answer: |
+    {role_instruction}
+
+    Требования к ответу:
+    1. Всегда отвечай максимально кратко, одно предложение.
+
+# Various app-wide settings
+app:
+  log_level: "INFO"
